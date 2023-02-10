@@ -41,7 +41,7 @@ function BaseLayout({ breadcrumb, title, children }) {
           action={{
             type: "external",
             route: "https://www.creative-tim.com/product/material-kit-react",
-            label: "free download",
+            label: "검색",
             color: "info",
           }}
           transparent
