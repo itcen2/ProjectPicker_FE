@@ -2,7 +2,7 @@
     min-height: 75vh;
     width: 100%;
     opacity: 1;
-    background: url('../../../img/pp2.gif') center top / cover transparent;
+    background: url('../../../../img/pp.gif') center top / cover transparent;
     display: grid;
     place-items: center;
 }
