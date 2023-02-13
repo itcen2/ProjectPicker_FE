@@ -1,18 +1,11 @@
 import React from "react";
 import {Grid, Button, Container, Typography, TextField, Link} from "@mui/material";
-import './css/User.css'
-import user from '../../../img/user.png'
-import auth_bg from '../../../img/auth_bg.png'
 
 
 import { BASE_URL, USER } from "../../../config/host-config";
 
 const Login = () => {
     const API_BASE_URL = BASE_URL + USER;
-
-    const goMain = () =>{
-        window.location.href ="/"
-      };
     
     const loginHandler = e => {
         e.preventDefault();
@@ -43,6 +36,7 @@ const Login = () => {
                 // 세션스토리지(브라우저종료되면 사라짐)
                 localStorage.setItem('ACCESS_TOKEN', result.token);
                 localStorage.setItem('LOGIN_USERNAME', result.userName);
+                localStorage.setItem('LOGIN_USERID', result.userId);
 
                 window.location.href='/';
             }
@@ -51,19 +45,8 @@ const Login = () => {
 
     return (
         <>
-        <div className="user">
-        <Container className="container" component="main" maxWidth="xs" style={{ margin: "50px auto" }}>
-        <Grid container spacing={2}>
-                <Grid item xs={12} >
-                    <Typography className='auth_title' component="h1" variant="h2" onClick={goMain} textAlign="center" marginBottom="50px">
-                        ProjectPicker
-                    </Typography>
-                </Grid>
-                <Grid item xs={12} className='logo'>
-                    <img src={user} alt='user_log' width={'50px'} height={'50px'}/>
-                </Grid>
-        </Grid>
-
+        <div id='root'>
+        <Container component="main" maxWidth="xs" style={{ margin: "300px auto" }}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <Typography component="h1" variant="h5" textAlign="center" marginBottom="15px">
@@ -109,15 +92,12 @@ const Login = () => {
                     </Grid>
                     </Grid>
                     <Grid item textAlign="center">
-                    <Link href="/join" variant="body2">
+                    <Link href="/join" variant="body2" >
                         계정이 없으십니까? 회원가입 하세요.
                     </Link>
                 </Grid>
             </form>
         </Container>
-        <div className = "login_foot" width="auto" height="auto">
-            <img src ={auth_bg} width="100%" height="100%" />
-        </div>
         </div>
     </>
         

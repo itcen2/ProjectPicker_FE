@@ -4,14 +4,22 @@ import { useLocation } from 'react-router-dom';
 import { BASE_URL, PP } from '../../../config/host-config';
 import Header from '../../layout/Header';
 import { getToken } from '../../util/login-util';
+import { MdCancel } from 'react-icons/md';
 import './css/PostWrite.css'
+import cn from 'classnames';
+
+
 const PostWrite = () => {
     const API_BASE_URL = BASE_URL + PP;
     const ACCESS_TOKEN = getToken();
     const location = useLocation(); 
     const id = location.state?.id;
+    const [count, setCount] = useState(0);
     const [postDetail, setPostDetail] = useState({});
     const [modify, setModify] = useState(true);
+    const [detailHashTags, setdetailHashTags] = useState([]);
+    const [hashTagInput, setHashTagInput] = useState();
+
     const headerInfo = {
         'content-type': 'application/json' 
         , 'Authorization': 'Bearer ' + ACCESS_TOKEN 
@@ -22,7 +30,7 @@ const PostWrite = () => {
         fetch(`${API_BASE_URL}/${id}`, {
             method: 'PUT',
             headers: headerInfo,
-            body: JSON.stringify({title : document.getElementById('title').value, content:document.getElementById('content').value, hashTags:[], status:false})
+            body: JSON.stringify({title : document.getElementById('title').value, content:document.getElementById('content').value, hashTags:detailHashTags, status:false})
         })
         .then(res => {
           if (res.status === 403) {
@@ -42,12 +50,45 @@ const PostWrite = () => {
         });
       };
 
+      const onkeyup = e =>{
+        if(count >=2){
+          alert('최대 2개까지 입력 가능합니다.');
+          e.target.value = '';
+        }
+          if(e.keyCode === 13){
+            setHashTagInput(false);
+            if(count === 0){
+              setdetailHashTags([...detailHashTags, document.getElementById('hashTags').value]);
+              document.getElementById('detail-hashTag1').innerText = document.getElementById('hashTags').value
+            }else if (count === 1){
+              setdetailHashTags([...detailHashTags, document.getElementById('hashTags').value]);
+              document.getElementById('detail-hashTag2').innerText = document.getElementById('hashTags').value;
+            }
+            e.target.value = '';
+            setCount(count+1);
+          }
+      };
+    const cancleTag = e=> {
+      if(e.target.id === 'detail-hashTag1-cancle'){
+        document.getElementById('detail-hashTag1').innerText = detailHashTags[1];
+        if(detailHashTags[1]){
+          setdetailHashTags([detailHashTags[1]]);
+        }
+        setdetailHashTags([]);
+      }else{
+        setdetailHashTags([detailHashTags[0]]);
+      }
+      setCount(count -1);
+    };
+
+
+
       const createPost = () =>{
         console.log(document.getElementById('title').value);
         fetch(`${API_BASE_URL}`, {
             method: 'POST',
             headers: headerInfo,
-            body: JSON.stringify({title : document.getElementById('title').value, content:document.getElementById('content').value, hashTags:[]})
+            body: JSON.stringify({title : document.getElementById('title').value, content:document.getElementById('content').value, hashTags:detailHashTags})
         })
         .then(res => {
           if (res.status === 403) {
@@ -91,8 +132,12 @@ const PostWrite = () => {
             setPostDetail(result);
             document.getElementById('title').defaultValue = result.title;
             document.getElementById('content').defaultValue = result.content;
-            document.getElementById('hashTags').defaultValue = result.title;
-            
+
+            setCount(result.hashTags.length);
+            setdetailHashTags(result.hashTags);
+            document.getElementById('detail-hashTag1').innerText = result.hashTags[0];
+            document.getElementById('detail-hashTag2').innerText = result.hashTags[1];
+
             });
         }else{
             setModify(false);
@@ -105,7 +150,7 @@ const PostWrite = () => {
         <span className='page-title'>프로젝트 모집</span>
         <div className='writer-title-box'>
             <span className='writer-title-text'>제목</span>
-            <TextField id="title" placeholder='제목을 입력 해 주세요' variant="outlined" className='writer-title-input' />
+            <input type='text' id="title" placeholder='제목을 입력 해 주세요' className='writer-title-input' />
         </div>
         <div className='writer-content-box'>
             <span className='writer-content-text'>내용</span>
@@ -113,7 +158,11 @@ const PostWrite = () => {
         </div>
         <div className='writer-hashtag-box'>
             <span className='writer-hashtag-text'>해시태그</span>
-            <TextField id="hashTags" placeholder='해시태그를 입력 해 주세요' variant="outlined" className='writer-hashTag-input' />
+            <input type='text' id="hashTags" placeholder='해시태그를 입력 해 주세요' onKeyUp={onkeyup}  className='writer-hashTag-input' />
+        </div>
+        <div>
+            <div className={cn('hashTag-box',{true:(count>=1)})}><p id='detail-hashTag1'/><MdCancel className='tag-cancle' id='detail-hashTag1-cancle' onClick={cancleTag}/></div>
+            <div className={cn('hashTag-box',{true:(count==2)})}><p id='detail-hashTag2'/><MdCancel className='tag-cancle' id='detail-hashTag2-cancle' onClick={cancleTag}/></div>
         </div>
         <Button variant="contained" className='commnet-submit-button' onClick={modify? modifyPost:createPost} >공고 올리기</Button>
     </div>

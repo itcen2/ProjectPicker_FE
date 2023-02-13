@@ -49,10 +49,40 @@
 }
 .comments-box .comments-input {
     text-align: center;
+    display: flex;
+    width: 100%;
 }
 .comments-box .comment-box {
     margin: 20px 40px;
     border: 1px solid #c5c4c4;
     padding: 15px;
     border-radius: 10px;
+}
+.comments-box .comment-box .info-box {
+    display: flex;
+    padding: 0 10px 0 0;
+}
+.comments-box .comment-box .user-info{
+    flex:1;
+}
+.comments-box .comment-box .comment-info{
+    display: flex;
+}
+.comments-box .comment-box .comment-info .comment{
+    flex:1;
+}
+.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+    width: 100%;
+}
+.detail-hashTag-box{
+    display: flex;
+}
+.detail-hashTag-box .hashTag-link{
+    background: rgb(42, 163, 42);
+    padding: 7px 12px;
+    margin: 5px;
+    color: white;
+    border-radius: 10px;
+    font-size: 13px;
+    text-decoration: none;
 }

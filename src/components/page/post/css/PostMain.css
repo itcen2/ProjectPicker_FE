@@ -1,7 +1,7 @@
 
 .post-table {
     width: 100%;
-    min-width: 700px;
+    min-width: 1000px;
     height: 768px;
     /* border: 1px solid #000; */
     border-radius: 16px;
@@ -11,7 +11,7 @@
     box-shadow: 0 0 8px #aaa;
 
     /* 박스 x축 중앙 정렬 : 마진 좌우값을 auto로 설정 */
-    margin: 0 auto 100px;
+    margin: 0 auto 30px;
 
     position: relative;
     
@@ -60,4 +60,12 @@
 }
 .loading .text-danger {
     color: rgba(13, 245, 245, 0.767) !important;
+}
+.post-write-button {
+    width: 300px;
+    height: 50px;
+    font-size: 16px !important;
+    border-radius: 30px !important;
+    left: 50%;
+    transform: translate(-50%, 0);
 }

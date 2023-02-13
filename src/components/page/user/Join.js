@@ -1,18 +1,12 @@
 import React, { useState } from 'react';
 import {Button, Container, Grid,
      TextField, Typography, Link} from "@mui/material";
-import user from '../../../img/user.png'
-import auth_bg from '../../../img/auth_bg.png'
 
 import { BASE_URL, USER } from '../../../config/host-config';
 
 const Join = () => {
 
     const API_BASE_URL = BASE_URL + USER;
-
-    const goMain = () =>{
-        window.location.href ="/"
-      };
 
    // 검증 메시지 저장 
    const [message, setMessage] = useState({
@@ -240,23 +234,12 @@ const Join = () => {
         });
 
      } else {
-        alert('입력창 다시 확인해주세요.');
+        alert('입력창 다시확인해라~~');
      }
   };
 
   return (
-    <div className="user">
-    <Container component="main" maxWidth="xs" style={{ margin: "50px auto" }}>
-        <Grid container spacing={2}>
-                <Grid item xs={12} >
-                    <Typography className='auth_title' component="h1" variant="h2" onClick={goMain} textAlign="center" marginBottom="50px">
-                        ProjectPicker
-                    </Typography>
-                </Grid>
-                <Grid item xs={12} className='logo'>
-                    <img src={user} alt='user_log' width={'50px'} height={'50px'}/>
-                </Grid>
-        </Grid>
+    <Container component="main" maxWidth="xs" style={{ margin: "300px auto" }}>
         <form noValidate onSubmit={submitHandler}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -344,17 +327,15 @@ const Join = () => {
                     </Button>
                 </Grid>
             </Grid>
+            <Grid container justify="flex-end">
                 <Grid item textAlign="center">
-                    <Link href="/login" variant="body2">
+                    <Link href="/login" variant="body2" >
                         이미 계정이 있습니까? 로그인 하세요.
                     </Link>
                 </Grid>
+            </Grid>
         </form>
     </Container>
-    <div width="auto" height="auto">
-            <img src ={auth_bg} width="100%" height="100%" />
-        </div>
-    </div>
   );
 };
 

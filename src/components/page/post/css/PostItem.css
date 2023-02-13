@@ -1,10 +1,9 @@
 .post-list-li{
-    display: flex;
+    display: contents !important;
     align-items: center;
     height: 55px;
     width: 100%;
     box-sizing: border-box;
-    border-bottom: 1px solid #b8b8b8;
 }
 .post-list .post-title{
     width: 20%;
@@ -40,4 +39,16 @@
     box-sizing: border-box;
     width: 100%;
     cursor: pointer;
+}
+.hashtag-box-list{
+    display: flex;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid #b8b8b8;
+}
+.hashtag-box.true{
+    padding:3px 5px !important;
+
+}
+#hashTag1, #hashTag2{
+    font-size: 12px !important;
 }

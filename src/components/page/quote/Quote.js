@@ -6,7 +6,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControl from '@mui/material/FormControl';
 import QuoteItem from './QuoteItem';
 
-import './css/Quote.css'
+import '../css/Quote.css'
 
 const Quote = () => {
 

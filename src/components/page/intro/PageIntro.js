@@ -1,5 +1,5 @@
 import React from 'react';
-import './css/PageIntro.css'
+import '../css/PageIntro.css'
 const PageIntro = () => {
   return (
     <div className='intro-bg'>
