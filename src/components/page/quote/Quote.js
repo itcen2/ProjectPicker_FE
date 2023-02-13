@@ -6,11 +6,11 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControl from '@mui/material/FormControl';
 import QuoteItem from './QuoteItem';
 
-import './css/Quote.css'
+import '../css/Quote.css'
 
 const Quote = () => {
 
-
+ 
 
   const [totalValue, setTotalValue] = useState({
     categori1 : 0,
@@ -42,7 +42,7 @@ const Quote = () => {
   };
 
   const writePost = () => {
-    //견적 작성페이지를 리다이렉트로 연결
+    window.location.href='/write'
   };
 
   const buttonClick = e => {
@@ -57,7 +57,7 @@ const Quote = () => {
   return (
     <div className='quote'>
       <h1 className='title'>예상 견적 프로그램</h1>
-          <FormControl>
+         <FormControl>
           <table className='left'>
           <td className='table-type'>플랫폼</td>
           <td className='table-radio'>
