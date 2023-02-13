@@ -57,6 +57,7 @@
 }
 #hashTag1, #hashTag2{
     margin: 0;
+    white-space: nowrap;
 }
 .tag-cancle{
     margin: 0 0 0 3px;
