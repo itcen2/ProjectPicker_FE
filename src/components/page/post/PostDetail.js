@@ -1,7 +1,7 @@
 import React, {useState, useEffect}from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { BASE_URL, PP } from '../../../config/host-config';
-import { getToken } from '../../util/login-util';
+import { getToken, getUserId } from '../../util/login-util';
 import {MdCancel, MdCheck} from 'react-icons/md'
 import './css/PostDetail.css'
 import TextField from '@mui/material/TextField';
@@ -15,7 +15,7 @@ import Header from '../../layout/Header';
 const PostDetail = () => {
     const API_BASE_URL = BASE_URL + PP;
     const ACCESS_TOKEN = getToken();
-    const location = useLocation(); // 추가된 부분
+    const location = useLocation();
     const id = location.state?.id;
     const headerInfo = {
       'content-type': 'application/json' 
@@ -23,6 +23,7 @@ const PostDetail = () => {
     };
     const [postDetail, setPostDetail] = useState('');
     const [comments, setComments] = useState([]);
+    const [userIdCheck , setUserIdCheck] = useState();
 
     useEffect(() =>{
 
@@ -34,6 +35,9 @@ const PostDetail = () => {
     .then(result => {
         setPostDetail(result);
         setComments(result.comment);
+        if(result.userId === getUserId()){
+          setUserIdCheck(true);
+        }
     });
     },[]);
     
@@ -48,6 +52,27 @@ const PostDetail = () => {
         } 
     };
 
+    const deletePost = () => {
+      fetch(`${API_BASE_URL}/${id}`, {
+        method: 'DELETE',
+        headers: headerInfo
+    })
+    .then(res => {
+      if (res.status === 403) {
+      alert('로그인이 필요한 서비스입니다!');
+      // 리다이렉트
+      return;
+    } else if (res.status === 500) {
+      alert('서버오류');
+      return;
+    }else if(res.status === 200){
+      alert('삭제 완료');
+      window.location.href = '/';
+
+    }
+    return res.json();
+  });
+    };
 
 
     const sendComment = (comment) => {
@@ -84,6 +109,11 @@ const PostDetail = () => {
     <div className='content-box'>
       <h1 className='post-title'>{postDetail.title}</h1>
       <p>{postDetail.content}</p>
+      {userIdCheck ?(<div className='post-set-box'>
+        <Button variant="contained" className='post-set-button' onClick={deletePost}>글 삭제</Button>
+        <Button variant="contained" className='post-set-button'><Link className='link' to='/write' state={{ id: id }}>글 수정</Link></Button>
+      </div>) :''}
+      
     </div>
     </div>
     <h1 className='project-comment'>댓글</h1>
@@ -95,7 +125,10 @@ const PostDetail = () => {
     <div className='comments'>{
       comments.map(comment => 
         <CommentsItem 
-        // key={comment}
+        key={comment.commentId}
+        setPostDetail = {setPostDetail}
+        setComments = {setComments}
+        postId={postDetail.postId}
             comments={comment} 
             />)
       }

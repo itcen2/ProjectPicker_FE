@@ -7,6 +7,7 @@ import { getToken } from '../../util/login-util';
 import PostList from './PostList';
 
 import './css/PostMain.css'
+import { Button } from '@mui/material';
 const PostMain = () => {
 
   const API_BASE_URL = BASE_URL + PP;
@@ -22,7 +23,7 @@ const PostMain = () => {
   useEffect(() => {
     console.log(API_BASE_URL);
 
-    fetch(API_BASE_URL+"/main", {
+    fetch(API_BASE_URL, {
         method: 'GET',
         headers: headerInfo
     })
@@ -69,9 +70,9 @@ const PostMain = () => {
         </div>
         <div className="post-list">
           {loading ? loadingPage:(<PostList posts = {posts} />)}
-            
         </div>
       </div>
+      <Button variant="contained" className='post-write-button' href='/write' >모집 글 작성하기</Button>
     </>
   );
 };

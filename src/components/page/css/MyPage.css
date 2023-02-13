@@ -1,0 +1,57 @@
+.user-info-box {
+    width: 1440px;
+    min-width: 1440px;
+    height: 300px;
+    border-radius: 16px;
+    box-shadow: 0 0 8px #aaa;
+    padding: 30px 50px;
+    display: flex;
+    text-align: center;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+.mypage-title{
+    margin: 150px 0 50px 0px;
+    font-size: 23px;
+    font-weight: 550;
+    color: #525252;
+    text-align: center;
+    /* margin: 20px 0; */
+}
+.user-info-box .user-profile{
+    width: 150px;
+    background: url('../../../img/user_profile.svg') center top / cover transparent;
+}
+.user-info-box table{
+    width: 25%;
+}
+.user-info-box .left-table{
+    padding: 25px 0 ;
+}
+.user-info-box .right-table{
+    padding: 25px 15px ;
+}
+.user-info-box .user-profile::after{
+    border-right: 1px solid;
+}
+.line{
+    margin: 50px 50px;
+    border-left: 1px solid #c7c7c7;
+}
+.user-info-box .user-set-box{
+    display: inline-grid;
+    width: 25%;
+}
+.user-info-box .user-set-button{
+    margin:10px;
+    color: #44719b;
+}
+.user-info-box .user-post-box{
+    width: 20%;
+    align-content: center;
+    display: grid;
+}
+.mypage-post-box{
+    margin: 0 100px;
+}
