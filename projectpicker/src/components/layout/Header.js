@@ -37,8 +37,8 @@ const Header = () => {
             
             {login ? ( 
             <div className='user'>
-                <Button href="/mypage" className='icons'> <BiUser /> </Button>
-                <Button onClick={logOut} className='icons'><SlLogout /></Button>
+                <Button href="/mypage" className='icons' title = '마이페이지'> <BiUser /> </Button>
+                <Button onClick={logOut} className='icons' title='로그아웃'><SlLogout /></Button>
             </div>
             ):
             (<div className='user'>
