@@ -1,11 +1,3 @@
-html {
-    background: url('../../../../img/auth_bg.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    height: 100%;
-    
-}
 
 .logo {
     text-align: center;
@@ -21,4 +13,8 @@ div#user {
 
 .auth_title {
     cursor: pointer;
+}
+
+.login_foot {
+    margin-top: 195px;
 }

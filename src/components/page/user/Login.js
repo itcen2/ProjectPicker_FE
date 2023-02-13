@@ -2,6 +2,7 @@ import React from "react";
 import {Grid, Button, Container, Typography, TextField, Link} from "@mui/material";
 import './css/User.css'
 import user from '../../../img/user.png'
+import auth_bg from '../../../img/auth_bg.png'
 
 
 import { BASE_URL, USER } from "../../../config/host-config";
@@ -51,7 +52,7 @@ const Login = () => {
     return (
         <>
         <div className="user">
-        <Container className="container" component="main" maxWidth="xs" style={{ margin: "100px auto" }}>
+        <Container className="container" component="main" maxWidth="xs" style={{ margin: "50px auto" }}>
         <Grid container spacing={2}>
                 <Grid item xs={12} >
                     <Typography className='auth_title' component="h1" variant="h2" onClick={goMain} textAlign="center" marginBottom="50px">
@@ -114,6 +115,9 @@ const Login = () => {
                 </Grid>
             </form>
         </Container>
+        <div className = "login_foot" width="auto" height="auto">
+            <img src ={auth_bg} width="100%" height="100%" />
+        </div>
         </div>
     </>
         
