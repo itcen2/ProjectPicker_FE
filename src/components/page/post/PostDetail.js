@@ -21,8 +21,9 @@ const PostDetail = () => {
       'content-type': 'application/json' 
       , 'Authorization': 'Bearer ' + ACCESS_TOKEN 
     };
-    const [postDetail, setPostDetail] = useState('');
+    const [postDetail, setPostDetail] = useState([]);
     const [comments, setComments] = useState([]);
+    const [hashTags, setHashTags] = useState([]);
     const [userIdCheck , setUserIdCheck] = useState();
 
     useEffect(() =>{
@@ -34,6 +35,7 @@ const PostDetail = () => {
     .then(res => res.json())
     .then(result => {
         setPostDetail(result);
+        setHashTags(result.hashTags);
         setComments(result.comment);
         if(result.userId === getUserId()){
           setUserIdCheck(true);
@@ -109,6 +111,10 @@ const PostDetail = () => {
     <div className='content-box'>
       <h1 className='post-title'>{postDetail.title}</h1>
       <p>{postDetail.content}</p>
+      <div className='detail-hashTag-box'>
+      <Link className='hashTag-link' to='/search' state={{ hashTag: ['#'+hashTags[0]] }}>{hashTags[0]}</Link>
+      <Link className='hashTag-link' to='/search' state={{ hashTag: ['#'+hashTags[1]] }}>{hashTags[1]}</Link>
+      </div>
       {userIdCheck ?(<div className='post-set-box'>
         <Button variant="contained" className='post-set-button' onClick={deletePost}>글 삭제</Button>
         <Button variant="contained" className='post-set-button'><Link className='link' to='/write' state={{ id: id }}>글 수정</Link></Button>

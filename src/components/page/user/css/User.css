@@ -1,0 +1,20 @@
+
+.logo {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+div#user {
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.auth_title {
+    cursor: pointer;
+}
+
+.login_foot {
+    margin-top: 195px;
+}

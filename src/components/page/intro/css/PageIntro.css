@@ -2,16 +2,11 @@
     min-height: 75vh;
     width: 100%;
     opacity: 1;
-    background: url('../../../../img/pp.gif') center top / cover transparent;
-
-    
-    height: 700px;
-    width: 2000px;
+    background: url('../../../img/pp2.gif') center top / cover transparent;
     display: grid;
     place-items: center;
 }
 .intro-bg .intro-text{
-    font-size: xxx-large;
     box-sizing: border-box;
     display: flex;
     flex-flow: row wrap;
@@ -22,5 +17,6 @@
     color: white;
     position: absolute;
     left: 50%;
+    font-size: xxx-large;
     transform: translate(-50%, 0);
 }

@@ -1,5 +1,5 @@
 import React, {useState, useEffect}from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { BASE_URL, MAIN, PP } from '../../../config/host-config';
 import { getToken } from '../../util/login-util';
 import {MdCancel, MdCheck} from 'react-icons/md'
@@ -22,6 +22,7 @@ const PostDetail = () => {
     };
     const [postDetail, setPostDetail] = useState([]);
     const [comments, setComments] = useState([]);
+    const [hashTags, setHashTags] = useState([]);
 
     useEffect(() =>{
       fetch(`${API_BASE_URL}${PP}/${id}`, {
@@ -30,7 +31,7 @@ const PostDetail = () => {
     })
     .then(res => res.json())
     .then(result => {
-      console.log(result);
+        setHashTags(result.hashTags);
         setPostDetail(result);
         setComments(result.comment);
         
@@ -60,6 +61,12 @@ const PostDetail = () => {
     <div className='content-box'>
       <h1 className='post-title'>{postDetail.title}</h1>
       <p>{postDetail.content}</p>
+      <div className='detail-hashTag-box'>
+
+        <Link className='hashTag-link' to='/search' state={{ hashTag: ['#'+hashTags[0]] }}>{hashTags[0]}</Link>
+        <Link className='hashTag-link' to='/search' state={{ hashTag: ['#'+hashTags[1]] }}>{hashTags[1]}</Link>
+
+      </div>
       <div className={cn('admin-post-allow', {true : postDetail.allow})}>{postDetail.allow ? (<MdCheck onClick={postsDone}/>):(<MdCancel onClick={postsDone}/>)}</div>
       <div className='post-set-box'>
         <Button variant="contained" className='post-set-button'>글 삭제</Button>

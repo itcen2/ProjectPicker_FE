@@ -14,6 +14,7 @@ const PostMain = () => {
   const ACCESS_TOKEN = getToken();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [hashTags, sethashTags] = useState([]);
 
   const headerInfo = {
     'content-type': 'application/json' 
@@ -64,12 +65,12 @@ const PostMain = () => {
     <p className='post-content-title'>등록된 프로젝트</p>
       <div className='post-table'>
         <div className='post-top'>
-            <span className='post-top-title'>제목</span>
-            <span className='post-top-content'>내용</span>
-            <span className='post-top-allow'>상태</span>
+            <span className='post-top-title'>상태</span>
+            <span className='post-top-content'>제목</span>
+            <span className='post-top-allow'>작성자</span>
         </div>
         <div className="post-list">
-          {loading ? loadingPage:(<PostList posts = {posts} />)}
+          {loading ? loadingPage:(<PostList posts = {posts} hashTags = {hashTags}/>)}
         </div>
       </div>
       <Button variant="contained" className='post-write-button' href='/write' >모집 글 작성하기</Button>
