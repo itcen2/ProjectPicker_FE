@@ -1,0 +1,39 @@
+.post-list-li{
+    display: flex;
+    align-items: center;
+    height: 55px;
+    width: 95%;
+    box-sizing: border-box;
+}
+.post-list .admin-post-list-link .admin-post-title{
+    width: 20%;
+    display: flex;
+}
+
+.post-list .admin-post-list-link .admin-post-content{
+    width: 60%;
+    display: flex;
+}
+.post-list button{
+    height: 30px;
+    width:40px;
+}
+.admin-post-allow{
+    font-size: 25px;
+    cursor: pointer;
+    color: rgb(255, 71, 71);
+}
+
+.admin-post-allow.true{
+    color: rgb(66, 175, 66);
+}
+
+.post-list-li .admin-post-list-link{
+    text-decoration-line: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    cursor: pointer;
+}

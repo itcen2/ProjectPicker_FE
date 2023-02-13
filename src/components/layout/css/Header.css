@@ -1,7 +1,7 @@
 .header .header-box {
     min-width: 750px;
     display: flex;
-    width: 80%;
+    width: 900px;
     height: 60px;
     position: fixed;
     background-color: rgba(255, 255, 255, 0.8);
@@ -21,6 +21,10 @@
     background: none;
     border: 0px;
 }
+
+.header .header-box .search-box:focus{
+    outline: none;
+}
 .header .header-box .project-title{
     align-items: center;
     display: flex;
@@ -38,4 +42,24 @@
 }
 .header .header-box .user .icons{
     font-size: 20px;
+}
+.hashTag-box.true{
+    background: #7fd18178;
+    text-align: center;
+    padding: 8px;
+    border-radius: 10px;
+    display: flex;
+    margin: 0 0 0 10px;
+    align-items: center;
+}
+.hashTag-box{
+    display: none;
+}
+#hashTag1, #hashTag2{
+    margin: 0;
+}
+.tag-cancle{
+    margin: 0 0 0 3px;
+    color: rgb(255, 92, 92);
+    cursor: pointer;
 }
