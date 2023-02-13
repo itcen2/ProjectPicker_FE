@@ -1,5 +1,0 @@
-#robots.txt는 웹사이트에 웹 크롤러같은 로봇들의 접근을 제어하기 위한 규약이다. 아직 권고안이라 꼭 지킬 의무는 없다.
-
-# https://www.robotstxt.org/robotstxt.html
-User-agent: *
-Disallow:
