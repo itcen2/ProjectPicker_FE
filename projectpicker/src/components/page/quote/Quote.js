@@ -10,7 +10,7 @@ import './css/Quote.css'
 
 const Quote = () => {
 
- 
+
 
   const [totalValue, setTotalValue] = useState({
     categori1 : 0,
@@ -57,7 +57,7 @@ const Quote = () => {
   return (
     <div className='quote'>
       <h1 className='title'>예상 견적 프로그램</h1>
-         <FormControl>
+          <FormControl>
           <table className='left'>
           <td className='table-type'>플랫폼</td>
           <td className='table-radio'>
