@@ -4,8 +4,9 @@ import { Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MainPage from '../components/page/MainPage';
 import PostDetail from '../components/page/post/PostDetail';
-import Join from '../components/page/user/Join';
 import Login from '../components/page/user/Login';
+import Join from '../components/page/user/Join';
+
 
 
 const AppRouter = () => {
