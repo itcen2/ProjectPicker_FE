@@ -5,18 +5,18 @@ import '../css/MyPage.css'
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { BASE_URL, USER } from '../../../config/host-config';
+import PostList from '../post/PostList';
 const UserInfo = ({myData,posts}) => {
     const API_BASE_URL = BASE_URL + USER;
-    console.log(myData);
     const {email, joinDate, userName, userId} = myData;
 
 
     const loadingPage = (
-        <ul className="post-list-ul">
-          <li className='post-list-li '>
-            <span className='post-title-none' > 등록된 게시글이 없습니다.</span>
-          </li>
-          </ul>
+        <tbody className="post-list-ul">
+      <tr className='post-list-li '>
+        <td className='post-title-none' > 등록된 게시글이 없습니다.</td>
+      </tr>
+    </tbody>
       );
         
       const signOutUser = () => {
@@ -72,24 +72,18 @@ const UserInfo = ({myData,posts}) => {
                 <Button variant="outlined" href="/search" className='user-set-button' onClick={signOutUser}>회원 탈퇴</Button>
             </div>
         </div>
-        <div className='mypage-post-box'>
         <p className='mypage-title'>내가 작성한 글</p>
-        <div className='post-table'>
-        <div className='post-top'>
-            <span className='post-top-title'>제목</span>
-            <span className='post-top-content'>내용</span>
-            <span className='post-top-allow'>상태</span>
-        </div>
-        <div className="post-list">
-          {!!posts.length ? (posts.map(post => <PostItem key={post.postId} posts={post} />)): loadingPage}
-        </div>
-      </div>
-        <ul className="post-list-ul">
-    {
-        
-    }
-        </ul>
-        </div>
+        <table className='post-table'>
+      <thead >
+        <tr className='post-top'>
+          <th className='post-top-title'>상태</th>
+          <th className='post-top-content'>제목</th>
+          <th className='post-top-allow'>작성자</th>
+        </tr>
+      </thead>
+          {!!posts.length ? (<PostList posts={posts}/>): loadingPage}
+          <tfoot></tfoot>
+        </table>
     </>
   );
 };

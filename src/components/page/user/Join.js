@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
 import {Button, Container, Grid,
      TextField, Typography, Link} from "@mui/material";
-import user from '../../../img/user.png'
 
 import { BASE_URL, USER } from '../../../config/host-config';
 
 const Join = () => {
 
     const API_BASE_URL = BASE_URL + USER;
-
-    const goMain = () =>{
-        window.location.href ="/"
-      };
 
    // 검증 메시지 저장 
    const [message, setMessage] = useState({
@@ -38,7 +33,6 @@ const Join = () => {
 
   // 유저 이름 입력란 검증 체인지 이벤트 핸들러
   const nameHandler = e => {
-    // console.log(e.target.value);
 
     const nameRegex = /^[가-힣]{2,5}$/;
 
@@ -170,10 +164,6 @@ const Join = () => {
 
   // 비밀번호확인 입력란 검증 체인지 이벤트 핸들러
   const passwordCheckHandler = e => {
-
-    console.log('pwcheck event!');
-
-    // 검증 시작
     let msg;
     if (!e.target.value) { // 패스워드 안적은거
         msg = '비밀번호 확인란은 필수값입니다!';
@@ -207,7 +197,6 @@ const Join = () => {
     // 객체에서 key값만 뽑아줌 'username'
     for (let key in validate) {
         let value = validate[key];
-        console.log(key + ': ' +value);
         if (!value) return false;
     }
     return true;
@@ -239,23 +228,12 @@ const Join = () => {
         });
 
      } else {
-        alert('입력창 다시 확인해주세요.');
+        alert('입력창 다시확인해라~~');
      }
   };
 
   return (
-    <div className="user">
-    <Container component="main" maxWidth="xs" style={{ margin: "100px auto" }}>
-        <Grid container spacing={2}>
-                <Grid item xs={12} >
-                    <Typography className='auth_title' component="h1" variant="h2" onClick={goMain} textAlign="center" marginBottom="50px">
-                        ProjectPicker
-                    </Typography>
-                </Grid>
-                <Grid item xs={12} className='logo'>
-                    <img src={user} alt='user_log' width={'50px'} height={'50px'}/>
-                </Grid>
-        </Grid>
+    <Container component="main" maxWidth="xs" style={{ margin: "300px auto" }}>
         <form noValidate onSubmit={submitHandler}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -343,14 +321,15 @@ const Join = () => {
                     </Button>
                 </Grid>
             </Grid>
+            <Grid container justify="flex-end">
                 <Grid item textAlign="center">
-                    <Link href="/login" variant="body2">
+                    <Link href="/login" variant="body2" >
                         이미 계정이 있습니까? 로그인 하세요.
                     </Link>
                 </Grid>
+            </Grid>
         </form>
     </Container>
-    </div>
   );
 };
 

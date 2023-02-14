@@ -1,17 +1,11 @@
 import React from "react";
 import {Grid, Button, Container, Typography, TextField, Link} from "@mui/material";
-import './css/User.css'
-import user from '../../../img/user.png'
 
 
 import { BASE_URL, USER } from "../../../config/host-config";
 
 const Login = () => {
     const API_BASE_URL = BASE_URL + USER;
-
-    const goMain = () =>{
-        window.location.href ="/"
-      };
     
     const loginHandler = e => {
         e.preventDefault();
@@ -35,13 +29,12 @@ const Login = () => {
                 // 로그인 실패
                 alert('로그인 정보가 일치하지 않습니다.');
             } else {
-                alert('로그인에 성공하였습니다.');
-
                 // 발급받은 토큰을 저장, 회원정보 저장
                 // 브라우저가 제공 로컬스토리지(브라우저가 종료되어도 남아있음)
                 // 세션스토리지(브라우저종료되면 사라짐)
                 localStorage.setItem('ACCESS_TOKEN', result.token);
                 localStorage.setItem('LOGIN_USERNAME', result.userName);
+                localStorage.setItem('LOGIN_USERID', result.userId);
 
                 window.location.href='/';
             }
@@ -50,19 +43,8 @@ const Login = () => {
 
     return (
         <>
-        <div className="user">
-        <Container className="container" component="main" maxWidth="xs" style={{ margin: "100px auto" }}>
-        <Grid container spacing={2}>
-                <Grid item xs={12} >
-                    <Typography className='auth_title' component="h1" variant="h2" onClick={goMain} textAlign="center" marginBottom="50px">
-                        ProjectPicker
-                    </Typography>
-                </Grid>
-                <Grid item xs={12} className='logo'>
-                    <img src={user} alt='user_log' width={'50px'} height={'50px'}/>
-                </Grid>
-        </Grid>
-
+        <div id='root'>
+        <Container component="main" maxWidth="xs" style={{ margin: "300px auto" }}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <Typography component="h1" variant="h5" textAlign="center" marginBottom="15px">
@@ -108,7 +90,7 @@ const Login = () => {
                     </Grid>
                     </Grid>
                     <Grid item textAlign="center">
-                    <Link href="/join" variant="body2">
+                    <Link href="/join" variant="body2" >
                         계정이 없으십니까? 회원가입 하세요.
                     </Link>
                 </Grid>

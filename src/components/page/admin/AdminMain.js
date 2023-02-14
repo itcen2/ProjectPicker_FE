@@ -63,16 +63,18 @@ const AdminMain = () => {
       <AdminHeader/>
       <div className='post-box'>
         <p className='post-content-title'>등록된 게시물</p>
-      <div className='post-table'>
-        <div className='post-top'>
-            <span className='post-top-title'>제목</span>
-            <span className='post-top-content'>내용</span>
-            <span className='post-top-allow'>허용</span>
-        </div>
-        <div className="post-list">
-            <PostList posts = {posts} postsDone={postsDone}/>
-        </div>
-    </div>
+        <table className='post-table'>
+      <thead >
+        <tr className='post-top'>
+          <th className='post-top-title'>상태</th>
+          <th className='post-top-content'>제목</th>
+          <th className='post-top-allow'>작성자</th>
+        </tr>
+      </thead>
+        <PostList posts = {posts} postsDone={postsDone}/>
+        <tfoot></tfoot>
+
+    </table>         
     </div>
     </>
   );

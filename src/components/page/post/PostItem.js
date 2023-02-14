@@ -5,22 +5,23 @@ import cn from 'classnames';
 import './css/PostItem.css'
 import { Link } from 'react-router-dom';
 const PostItem = ({key,posts}) => {
-    const {postId, title, userEmail, userName} = posts;
-    console.log(posts.hashTags.length);
+    const {postId, title, userEmail, userName, create} = posts;
     const tag = '/detail';
   return (
-    <li className='post-list-li ' key={key} >
+    <>
+    <tr className='post-list-li '  >
         <Link className='post-list-link' to={tag} state={{ id: postId }}>
-        <span className='post-allow' >모집중</span>
-        <span className='post-content' >{title}</span>
-        <div className='post-title'>{userName}<br/>{'('+userEmail+')'}</div>
+        <td className='post-allow' >모집중</td>
+        <td  className='post-content'>{title}</td>
+        <td className='post-title' rowSpan='2'>{userName}<br/>{'('+userEmail+')'}</td>
         </Link>
-        <div className='hashtag-box-list'>
-          <div className={cn('hashTag-box',{true:(posts.hashTags.length>=1)})}><p id='hashTag1'/>{posts.hashTags[0]}</div>
-          <div className={cn('hashTag-box',{true:(posts.hashTags.length==2)})}><p id='hashTag2'/>{posts.hashTags[1]}</div>
-        </div>
-        
-    </li>
+      </tr>
+        <tr className='hashtag-box-list'>
+          <td className={cn('post-hashTag-box',{true:(posts.hashTags.length>=1)})} ><Link to='/search' id='hashTag1' state={{ hashTag: ['#'+posts.hashTags[0]] }}>{posts.hashTags[0]}</Link></td>
+          <td className={cn('post-hashTag-box',{true:(posts.hashTags.length==2)})} to='/search' ><Link to='/search'id='hashTag1'  state={{ hashTag: ['#'+posts.hashTags[1]] }}>{posts.hashTags[1]}</Link></td>
+          <td className='create-date'></td>
+        </tr>      
+    </>
   );
 };
 

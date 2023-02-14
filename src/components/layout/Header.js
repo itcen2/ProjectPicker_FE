@@ -28,6 +28,9 @@ const Header = () => {
   };
   
   const onkeyup = e =>{
+    if(!document.getElementById('search-box').value){
+      setHashTagInput(false);
+    }
     if(e.keyCode === 16 && document.getElementById('search-box').value === '#'){
       if(count>=2){
         alert('해시태그 검색은 2개까지 가능합니다');
@@ -46,29 +49,34 @@ const Header = () => {
         if(count === 0){
           sethashTags([...hashTags, document.getElementById('search-box').value]);
           document.getElementById('hashTag1').innerText = document.getElementById('search-box').value;
+          setCount(count+1);
         }else if (count === 1){
           sethashTags([...hashTags, document.getElementById('search-box').value]);
           document.getElementById('hashTag2').innerText = document.getElementById('search-box').value;
+          setCount(count+1);
         }
         document.getElementById('search-box').value = '';
-        setCount(count+1);
       }
     }
     if(!hashTagInput){
-      console.log(value);
       setValue(document.getElementById('search-box').value);
-      if(e.keyCode === 13){
-        document.getElementById('search-link').click();
+      if(document.getElementById('search-box').value){
+        if(e.keyCode === 13){
+          document.getElementById('search-link').click();
+        }
+      }else{
+        alert("검색어를 입력해 주세요")
       }
     }
   };
 const cancleTag = e=> {
   if(e.target.id === 'hashTag1-cancle'){
-    document.getElementById('hashTag1').innerText = hashTags[1];
-    if(hashTags[1]){
+    if(hashTags.length >=2){
+      document.getElementById('hashTag1').innerText = hashTags[1];
       sethashTags([hashTags[1]]);
+    }else{
+      sethashTags([]);
     }
-    sethashTags([]);
   }else{
     sethashTags([hashTags[0]]);
   }
@@ -87,7 +95,7 @@ useEffect(() => {
             <div className={cn('hashTag-box',{true:(count==2)})}><p id='hashTag2'/><MdCancel className='tag-cancle' id='hashTag2-cancle' onClick={cancleTag}/></div>
             <input id='search-box' className='search-box'type="text" placeholder='검색할 내용을 입력 해 주세요' onKeyUp={onkeyup}></input>
             <Button variant="contained"><Link id='search-link' className='link' to='/search' state={{ hashTag: hashTags, value : value }}>검색</Link></Button>
-            {login ? (<div className='user'><Button href="/mypage" title='마이페이지'><BiUser className='icons'/></Button><Button className='icons'onClick={logOut} title='로그아웃'><SlLogout /></Button></div>): (<div className='user'><Button href="/login" className='icons' title='로그인'><SlLogin /></Button></div>)}
+            {login ? (<div className='user'><Button href="/mypage"><BiUser className='icons'/></Button><Button className='icons'onClick={logOut}><SlLogout /></Button></div>): (<div className='user'><Button href="/login" className='icons'><SlLogin /></Button></div>)}
             {/* <Button href="/login">로그인</Button> */}
         </div>
     </div>

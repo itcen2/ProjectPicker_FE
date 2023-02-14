@@ -36,7 +36,6 @@ const MyPage = () => {
             .then(result => {
                 setMyData(result);
                 setPost(result.posts);
-                console.log(result);
             });
 
     },[]);

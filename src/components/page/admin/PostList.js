@@ -4,7 +4,7 @@ import './css/PostList.css'
 
 const PostList = ({posts, postsDone}) => {
   return (
-    <ul className="post-list-ul">
+    <tbody className="post-list-ul">
     {
         posts.map(post => 
         <PostItem 
@@ -13,7 +13,7 @@ const PostList = ({posts, postsDone}) => {
             postsDone = {postsDone}
             />)
     }
-</ul>
+  </tbody>
   );
 };
 

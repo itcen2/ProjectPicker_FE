@@ -3,27 +3,37 @@ import {Button, Container, Grid,
      TextField, Typography, Link} from "@mui/material";
 
 import { BASE_URL, USER } from '../../../config/host-config';
+import { getToken } from '../../util/login-util';
 
 const ModifyPw = () => {
 
     const API_BASE_URL = BASE_URL + USER;
+    const ACCESS_TOKEN = getToken();
+    const headerInfo = {
+        'content-type': 'application/json' 
+        , 'Authorization': 'Bearer ' + ACCESS_TOKEN 
+      };
 
    // 검증 메시지 저장 
    const [message, setMessage] = useState({
+      rawPassword: '',
       password: '',
       passwordCheck: ''
    });  
 
    // 검증 완료 여부
    const [validate, setValidate] = useState({
+      rawPassword: false,
       password: false,
       passwordCheck: false
    });
 
    // 입력값 저장
    const [userValue, setUserValue] = useState({
-      password: '',
+      rawPassword: '',
+      password: ''
    });
+   const pwRegex =  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
 
   // 비밀번호 입력란 검증 체인지 이벤트 핸들러
   const passwordHandler = e => {
@@ -36,7 +46,6 @@ const ModifyPw = () => {
         passwordCheck: false
     });
     
-    const pwRegex =  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
 
     // 검증 시작
     let msg;
@@ -93,9 +102,43 @@ const ModifyPw = () => {
             passwordCheck: true
         });
     }
+    
     setMessage({
         ...message,
         passwordCheck: msg
+    });
+    
+  };
+
+  const rawPasswordHandler = e => {
+
+    // 검증 시작
+    let msg;
+    if (!e.target.value) { // 패스워드 안적은거
+        msg = '현재 비밀번호 입력은 필수값입니다!';
+        setValidate({
+            ...validate,
+            rawPassword: false
+        });
+    } else if (!pwRegex.test(e.target.value)) {
+        msg = '8글자 이상의 영문,숫자,특수문자를 포함해주세요!';
+        setValidate({
+            ...validate,
+            rawPassword: false
+        });
+    }else{
+        setValidate({
+            ...validate,
+            rawPassword: true
+        });
+    }
+    setMessage({
+        ...message,
+        rawPassword: msg
+    });
+    setUserValue({
+        ...userValue,
+        rawPassword: e.target.value
     });
   };
 
@@ -106,7 +149,6 @@ const ModifyPw = () => {
     // 객체에서 key값만 뽑아줌 'username'
     for (let key in validate) {
         let value = validate[key];
-        console.log(key + ': ' +value);
         if (!value) return false;
     }
     return true;
@@ -118,21 +160,16 @@ const ModifyPw = () => {
 
      // 입력값 검증을 올바르게 수행했는지 검사
      if (isValid()) {
-        // alert('회원가입 이제 보낼게~~');
 
-        fetch(`${API_BASE_URL}/signup`, {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
+        fetch(`${API_BASE_URL}/updateUser`, {
+            method: 'PUT',
+            headers: headerInfo,
             body: JSON.stringify(userValue)
         })
         .then(res => {
-            // 현재 비밀번호와 입력한 비밀번호가 다를때 
             if (res.status === 200) {
                 alert('비밀번호를 수정했습니다.');
-                // 로그인페이지로 리다이렉트
-                window.location.href = '/login';
+                window.location.href = '/mypage';
             }
             else {
                 alert('비밀번호 수정에에 실패했습니다. 잠시 후 다시 시도하세요.');
@@ -163,7 +200,13 @@ const ModifyPw = () => {
                         type="password"
                         id="rowPassword"
                         autoComplete="current-password"
+                        onChange={rawPasswordHandler}
                     />
+                    <span style={
+                        validate.rawPassword 
+                        ? {color: 'green'}
+                        : {color: 'red'}
+                    }>{message.rawPassword}</span>
                 </Grid>
                 <Grid item xs={12}>
                     <TextField

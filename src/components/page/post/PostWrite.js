@@ -26,6 +26,7 @@ const PostWrite = () => {
       };
 
       const modifyPost = () => {
+        if(document.getElementById('title').value && document.getElementById('content').value){
         setPostDetail({...postDetail, title : document.getElementById('title').value, content:document.getElementById('content').value})
         fetch(`${API_BASE_URL}/${id}`, {
             method: 'PUT',
@@ -48,6 +49,9 @@ const PostWrite = () => {
           alert('수정 되었습니다');
           window.location.href='/';
         });
+      }else{
+        alert('내용을 작성해 주세요');
+      }
       };
 
       const onkeyup = e =>{
@@ -84,7 +88,7 @@ const PostWrite = () => {
 
 
       const createPost = () =>{
-        console.log(document.getElementById('title').value);
+        if(document.getElementById('title').value && document.getElementById('content').value){
         fetch(`${API_BASE_URL}`, {
             method: 'POST',
             headers: headerInfo,
@@ -106,6 +110,9 @@ const PostWrite = () => {
           alert('작성이 완료 되었습니다. 관리자 승인 후 게시글을 볼 수 있습니다.');
           window.location.href='/';
         });
+      }else{
+        alert('내용을 작성해 주세요');
+      }
       };
 
 
