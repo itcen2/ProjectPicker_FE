@@ -87,7 +87,7 @@ useEffect(() => {
             <div className={cn('hashTag-box',{true:(count==2)})}><p id='hashTag2'/><MdCancel className='tag-cancle' id='hashTag2-cancle' onClick={cancleTag}/></div>
             <input id='search-box' className='search-box'type="text" placeholder='검색할 내용을 입력 해 주세요' onKeyUp={onkeyup}></input>
             <Button variant="contained"><Link id='search-link' className='link' to='/search' state={{ hashTag: hashTags, value : value }}>검색</Link></Button>
-            {login ? (<div className='user'><Button href="/mypage"><BiUser className='icons'/></Button><Button className='icons'onClick={logOut}><SlLogout /></Button></div>): (<div className='user'><Button href="/login" className='icons'><SlLogin /></Button></div>)}
+            {login ? (<div className='user'><Button href="/mypage" title='마이페이지'><BiUser className='icons'/></Button><Button className='icons'onClick={logOut} title='로그아웃'><SlLogout /></Button></div>): (<div className='user'><Button href="/login" className='icons' title='로그인'><SlLogin /></Button></div>)}
             {/* <Button href="/login">로그인</Button> */}
         </div>
     </div>
