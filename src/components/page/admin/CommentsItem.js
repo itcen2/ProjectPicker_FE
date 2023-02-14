@@ -130,12 +130,9 @@ const CommentsItem = ({comments, postId, setPostDetail, setComments}) => {
     );
 
     const checkUser = () => {
-      if(getUserId() === userId) {
         return tag;
-      }else{ 
-        return ;
-      };
-    };
+    }
+
   return (
     <>
         <div className='comment-box'>

@@ -1,6 +1,11 @@
 .content{
-    margin: 150px 50px 100px;
+    margin-top: 150px;
+    width: 1100px;
+    left: 50%;
+    transform: translate(-50%, 0);
     border-radius: 10px;
+    position: absolute;
+
 }
 
 .content-box{
@@ -18,11 +23,12 @@
     font-size: 23px;
     font-weight: 550;
     color: #525252;
-    margin: 0 50px;
+    margin: 100px 0 30px 0 ;
 }
 .content .post-title{
     font-size: 23px;
     padding: 0 0 30px 0;
+    margin-top: 20px;
     border-bottom: 1px solid gray;
 }
 
@@ -33,7 +39,6 @@
 
 .comments-box {
     padding: 20px;
-    margin: 50px;
     border-radius: 10px;
     border: 1px solid #c5c4c4;
 }
@@ -77,7 +82,8 @@
 .detail-hashTag-box{
     display: flex;
 }
-.detail-hashTag-box .hashTag-link{
+.detail-hashTag-box .hashTag-link.true{
+    display: block;
     background: rgb(42, 163, 42);
     padding: 7px 12px;
     margin: 5px;
@@ -85,4 +91,7 @@
     border-radius: 10px;
     font-size: 13px;
     text-decoration: none;
+}
+.detail-hashTag-box .hashTag-link{
+    display: none;
 }

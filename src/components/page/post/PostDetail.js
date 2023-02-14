@@ -45,13 +45,11 @@ const PostDetail = () => {
     
     const commentPost = e => {
       e.preventDefault();
-      
-        const comment = document.getElementById('comment').value;
-        if(comment !== ''){
-          sendComment(document.getElementById('comment').value);
+        if(document.getElementById('comment').value){
+            sendComment(document.getElementById('comment').value);
         }else{
-          alert("댓글을 입력 해 주세요.");
-        } 
+          alert("댓글을 입력 해 주세요");
+        }
     };
 
     const deletePost = () => {
@@ -103,30 +101,36 @@ const PostDetail = () => {
     });
     };
 
+    const enterCheck = e =>{
+      if(e.keyCode === 13){
+        document.getElementById('commnet-submit-button').click();
+      }
+    };
   return (
     <>
     <Header/>
     <div className='content'>
       <h1 className='project-title'>프로젝트 내용</h1>
     <div className='content-box'>
+      <div className='detail-hashTag-box'>
+      <Link className={cn('hashTag-link', {true:hashTags.length>=1})} to='/search' state={{ hashTag: ['#'+hashTags[0]] }}>{hashTags[0]}</Link>
+      <Link className={cn('hashTag-link', {true:hashTags.length===2})} to='/search' state={{ hashTag: ['#'+hashTags[1]] }}>{hashTags[1]}</Link>
+      </div>
       <h1 className='post-title'>{postDetail.title}</h1>
       <p>{postDetail.content}</p>
-      <div className='detail-hashTag-box'>
-      <Link className='hashTag-link' to='/search' state={{ hashTag: ['#'+hashTags[0]] }}>{hashTags[0]}</Link>
-      <Link className='hashTag-link' to='/search' state={{ hashTag: ['#'+hashTags[1]] }}>{hashTags[1]}</Link>
-      </div>
+      
       {userIdCheck ?(<div className='post-set-box'>
         <Button variant="contained" className='post-set-button' onClick={deletePost}>글 삭제</Button>
         <Button variant="contained" className='post-set-button'><Link className='link' to='/write' state={{ id: id }}>글 수정</Link></Button>
       </div>) :''}
-      
-    </div>
-    </div>
+      </div>
+
+    
     <h1 className='project-comment'>댓글</h1>
     <div className='comments-box'>
     <div className='comments-input'>
-      <TextField id="comment" label="댓글 입력" variant="outlined" />
-      <Button variant="contained" className='commnet-submit-button' onClick={commentPost}>전송</Button>
+      <TextField id="comment" label="댓글 입력" variant="outlined" onKeyUp={enterCheck}/>
+      <Button variant="contained" className='commnet-submit-button' id='commnet-submit-button' onClick={commentPost}>전송</Button>
     </div>
     <div className='comments'>{
       comments.map(comment => 
@@ -138,6 +142,7 @@ const PostDetail = () => {
             comments={comment} 
             />)
       }
+    </div>
     </div>
     </div>
     </>

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Spinner } from 'reactstrap';
 
-import { BASE_URL, PM, PP } from '../../../config/host-config';
+import { BASE_URL, PM, PP, PAGE } from '../../../config/host-config';
 
 import { getToken } from '../../util/login-util';
 import PostList from './PostList';
 
 import './css/PostMain.css'
 import { Button } from '@mui/material';
+import PageInfo from './PageInfo';
 const PostMain = () => {
 
   const API_BASE_URL = BASE_URL + PP;
@@ -15,16 +16,17 @@ const PostMain = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [hashTags, sethashTags] = useState([]);
-
+  const [pageInfo, setPageInfo] = useState('');
+  const [page, setPage] = useState(1);
+  // const [currentPage, setPage] = useState(1);
   const headerInfo = {
     'content-type': 'application/json' 
     , 'Authorization': 'Bearer ' + ACCESS_TOKEN 
   };
 
   useEffect(() => {
-    console.log(API_BASE_URL);
 
-    fetch(API_BASE_URL, {
+    fetch(`${API_BASE_URL}${PAGE}/${page}`, {
         method: 'GET',
         headers: headerInfo
     })
@@ -41,20 +43,21 @@ const PostMain = () => {
           return res.json();
         })
         .then(result => {
+            setPageInfo(result.pageInfo)
             setPosts(result.posts);
             // 로딩완료처리
             setLoading(false);
         });
 
-  }, []);
+  }, [page]);
 
 
   const loadingPage = (
-    <ul className="post-list-ul">
-      <li className='post-list-li '>
-        <span className='post-title-none' > 등록된 게시글이 없습니다.</span>
-      </li>
-      </ul>
+    <tbody className="post-list-ul">
+      <tr className='post-list-li '>
+        <td className='post-title-none' > 등록된 게시글이 없습니다.</td>
+      </tr>
+    </tbody>
   );
 
   // 로딩완료시 보여줄 태그
@@ -63,16 +66,18 @@ const PostMain = () => {
   return (
     <>
     <p className='post-content-title'>등록된 프로젝트</p>
-      <div className='post-table'>
-        <div className='post-top'>
-            <span className='post-top-title'>상태</span>
-            <span className='post-top-content'>제목</span>
-            <span className='post-top-allow'>작성자</span>
-        </div>
-        <div className="post-list">
-          {loading ? loadingPage:(<PostList posts = {posts} hashTags = {hashTags}/>)}
-        </div>
-      </div>
+    <table className='post-table'>
+      <thead >
+        <tr className='post-top'>
+          <th className='post-top-title'>상태</th>
+          <th className='post-top-content'>제목</th>
+          <th className='post-top-allow'>작성자</th>
+        </tr>
+      </thead>
+        {loading ? loadingPage:(<PostList posts = {posts} hashTags = {hashTags}/>)}
+        <PageInfo pageInfo={pageInfo} setPage={setPage} page={page}/>
+        <tfoot></tfoot>
+    </table>
       <Button variant="contained" className='post-write-button' href='/write' >모집 글 작성하기</Button>
     </>
   );

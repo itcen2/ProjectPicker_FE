@@ -18,3 +18,4 @@ export const ADMIN = '/admin';
 export const MAIN = '/admin/main';
 export const PM = '/projectpicker/main';
 export const PP = '/projectpicker';
+export const PAGE = '/page';

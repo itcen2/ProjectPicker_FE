@@ -48,7 +48,7 @@ const Quote = () => {
   const buttonClick = e => {
     if(totalValue.categori1 !==0 && totalValue.categori2 !==0 && totalValue.categori3 !== 0 && totalValue.categori4 !== 0){
     const result = parseInt(totalValue.categori1) + parseInt(totalValue.categori2) + parseInt(totalValue.categori3) + parseInt(totalValue.categori4);
-    document.getElementsByClassName('totalValueText')[0].innerText='총 가격은 : '+ result;
+    document.getElementsByClassName('totalValueText')[0].innerText='예상 견적 : '+ result;
     setSubmit(!submit);
     }else{
       alert("선택을 해주세요.");

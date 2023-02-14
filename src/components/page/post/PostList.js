@@ -4,15 +4,16 @@ import './css/PostList.css'
 
 const PostList = ({posts}) => {
   return (
-    <ul className="post-list-ul">
+    <tbody className="post-list-ul">
     {
         posts.map(post => 
         <PostItem 
-        key={post.postId}
+          key={post.postId}
             posts={post} 
             />)
     }
-</ul>
+  </tbody>
+
   );
 };
 

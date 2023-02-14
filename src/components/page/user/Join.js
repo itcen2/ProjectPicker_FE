@@ -33,7 +33,6 @@ const Join = () => {
 
   // 유저 이름 입력란 검증 체인지 이벤트 핸들러
   const nameHandler = e => {
-    // console.log(e.target.value);
 
     const nameRegex = /^[가-힣]{2,5}$/;
 
@@ -165,10 +164,6 @@ const Join = () => {
 
   // 비밀번호확인 입력란 검증 체인지 이벤트 핸들러
   const passwordCheckHandler = e => {
-
-    console.log('pwcheck event!');
-
-    // 검증 시작
     let msg;
     if (!e.target.value) { // 패스워드 안적은거
         msg = '비밀번호 확인란은 필수값입니다!';
@@ -202,7 +197,6 @@ const Join = () => {
     // 객체에서 key값만 뽑아줌 'username'
     for (let key in validate) {
         let value = validate[key];
-        console.log(key + ': ' +value);
         if (!value) return false;
     }
     return true;

@@ -24,15 +24,12 @@ const Login = () => {
         })
         .then(res => res.json())
         .then(result => {
-            //console.log(result);
             if (result.message) {
                 // 로그인 실패
                 alert("로그인 실패");
             } else {
-                alert('로그인 성공!');
 
                 localStorage.setItem('ACCESS_TOKEN', result.token);
-                console.log(result);
                 localStorage.setItem('LOGIN_USERNAME', result.userName);
 
                 window.location.href='/admin';
