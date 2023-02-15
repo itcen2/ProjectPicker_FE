@@ -4,7 +4,9 @@ const hostname = window.location.hostname;
 
 let backendHost; // 백엔드 호스트 이름
 
-    backendHost = 'http://52.79.144.168:8080';
+    // backendHost = 'http://52.79.144.168:8080';
+    backendHost = 'http://localhost:8080';
+
 
 export const BASE_URL = backendHost;
 export const USER = '/auth';
