@@ -4,13 +4,7 @@ const hostname = window.location.hostname;
 
 let backendHost; // 백엔드 호스트 이름
 
-if (hostname === 'localhost') {
-    backendHost = 'http://localhost:8080';
-}
-// AWS 배포시 설정(수정) 해야하는 부분
-else if (hostname === 'todo-buket.s3-website.ap-northeast-2.amazonaws.com') {
-    backendHost = 'http://3.38.64.156:80';
-}
+    backendHost = 'http://52.79.144.168:8080';
 
 export const BASE_URL = backendHost;
 export const USER = '/auth';

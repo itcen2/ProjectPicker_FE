@@ -19,6 +19,15 @@
     color: #525252;
     margin: 20px 0;
 }
+
+.content .writer-info{
+    text-align: end;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid gray;
+}
+.content .writer-info p{
+    margin: 0;
+}
 .project-comment{
     font-size: 23px;
     font-weight: 550;
@@ -27,9 +36,9 @@
 }
 .content .post-title{
     font-size: 23px;
-    padding: 0 0 30px 0;
+
     margin-top: 20px;
-    border-bottom: 1px solid gray;
+
 }
 
 .content .post-allow{
@@ -41,10 +50,6 @@
     padding: 20px;
     border-radius: 10px;
     border: 1px solid #c5c4c4;
-}
-
-.css-1u3bzj6-MuiFormControl-root-MuiTextField-root{
-    width : 85%;
 }
 
 .comments-box .comments-input .commnet-submit-button{
@@ -76,7 +81,7 @@
 .comments-box .comment-box .comment-info .comment{
     flex:1;
 }
-.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+.css-i44wyl {
     width: 100%;
 }
 .detail-hashTag-box{
