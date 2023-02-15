@@ -117,8 +117,11 @@ const PostDetail = () => {
       <Link className={cn('hashTag-link', {true:hashTags.length===2})} to='/search' state={{ hashTag: ['#'+hashTags[1]] }}>{hashTags[1]}</Link>
       </div>
       <h1 className='post-title'>{postDetail.title}</h1>
+      <div className='writer-info'>
+        <p>{postDetail.userName} ({postDetail.userEmail})</p>
+        <p >{postDetail.modDate}</p>
+      </div>
       <p>{postDetail.content}</p>
-      
       {userIdCheck ?(<div className='post-set-box'>
         <Button variant="contained" className='post-set-button' onClick={deletePost}>글 삭제</Button>
         <Button variant="contained" className='post-set-button'><Link className='link' to='/write' state={{ id: id }}>글 수정</Link></Button>

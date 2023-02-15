@@ -25,6 +25,9 @@ const PostSearch = () => {
     
 
     useEffect(() =>{
+      setLoading(true);
+      setPageInfo('');
+      setPosts([]);
         if(hashTags.length === 0){
             fetch(`${API_BASE_URL}/search/${value.replace('#','')}${PAGE}/${page}`, {
                 method: 'GET',
